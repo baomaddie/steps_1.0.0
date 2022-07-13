@@ -1,0 +1,219 @@
+/* html elements */
+
+body, select, label, input {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+  }
+  
+  input { box-shadow: inset 0 1px 2px rgba(0,0,0,.39), 0 -1px 1px rgb(131, 63, 63), 0 1px 0 #FFF; }
+  
+  /* classes */
+  
+  .aic { align-items: center; }
+  
+  .baf { background-attachment: fixed; }
+  
+  .bcb { background-color: rgb(165, 190, 235); }
+  
+  .bcp { background-color: #eba3a3; }
+  
+  .bcw { background-color: white; }
+  
+  .bgs { background-color: rgb(210, 217, 230); }
+  
+  .bpc { background-position: center; }
+  
+  .br25 { border-radius: 25px; }
+  
+  .brnr { background-repeat: no-repeat; }
+  
+  .bsstd { box-shadow: 3px 3px 5px rgb(127, 127, 127); }
+  
+  .btnSave {
+    height: 100px; 
+    font-size: 30px; 
+    border-radius: 25px;
+  }
+  
+  .dib { display: inline-block; }
+  
+  .divform {
+    position: absolute;
+    left: 50%;
+    -ms-transform: translateX(-50%);
+    -webkit-transform: translate(-50%);
+    transform: translate(-50%);
+  }
+  
+  .divHalf {
+    /* display: fixed; */
+    border: solid 1px black; 
+    padding-top:20px; 
+    padding-bottom:20px; 
+    padding-left:10px; 
+    background-color: rgb(165, 190, 235); 
+    border-radius: 25px;
+    width: 490px;
+  }
+  
+  .divMessage {
+    border: solid 1px black; 
+    border-radius: 5px;
+    width: 300px;
+    font-size: 30px; 
+    position: fixed;
+    top: 60%;
+    left: 47%;
+    margin-top: -100px;
+    margin-left: -100px;
+    display: none;
+    z-index: 2;
+  }
+  
+  .df { display: flex; }
+  
+  .fs20 { font-size: 20px; }
+  
+  .fs25 { font-size: 25px; }
+  
+  .fs30 { font-size: 30px; }
+  
+  .fs40 { font-size: 40px; }
+  
+  .l1 { left:1px; }
+  
+  .l25 { left:25px; }
+  
+  .bdr { border: solid 1px black; }
+  
+  .dtc { display: table-cell; }
+  
+  .dtr { display: table-row; }
+  
+  .pa { position: absolute; }
+  
+  .r20 { right: 20px; }
+  
+  .tac { text-align: center; }
+
+  .tar { text-align: right; }
+  
+  .tal { text-align: left; }
+
+  .t15 { top : 15px; }
+    
+  .vat { vertical-align: top; }
+  
+  .vab { vertical-align: bottom; }
+  
+  .vam { vertical-align: middle; }
+
+  .vas { vertical-align: super; }
+
+  .h20 { height:20px; }
+  
+  .h50 { height: 50px; }
+  
+  .h75 { height: 75px; }
+  
+  .h100 { height: 100px; }
+  
+  .h400 { height: 400px; }
+  
+  .h500 { height: 500px; }
+  
+  .h550 { height: 550px; }
+  
+  .ma { margin: auto; }
+  
+  .ml10 { margin-left:10px; }
+  
+  .ml20 { margin-left:20px; }
+  
+  .ml30 { margin-left:30px; }
+  
+  .mt10 { margin-top:10px; }
+  
+  .mt20 { margin-top:20px; }
+  
+  .pb10 { padding-bottom:10px; }
+  
+  .pb20 { padding-bottom:20px; }
+  
+  .pl10 { padding-left: 10px; }
+  
+  .pl20 { padding-left: 20px; }
+  
+  .pl40 { padding-left: 40px; }
+  
+  .pl200 { padding-left: 200px; }
+  
+  .pr10 { padding-right: 10px; }
+  
+  .pr20 { padding-right: 20px; }
+  
+  .pt10 { padding-top:10px; }
+  
+  .pt20 { padding-top:20px; }
+  
+  .pt50 { padding-top:50px; }
+
+  .w20 { width: 20px; }
+  
+  .w25 { width: 25px; }
+  
+  .w30 { width: 30px; }
+  
+  .w50 { width: 50px; }
+  
+  .w70 { width: 70px; }
+  
+  .w80 { width: 80px; }
+  
+  .w100 { width: 100px; }
+  
+  .w140 { width: 140px; }
+  
+  .w150 { width: 150px; }
+  
+  .w175 { width: 175px; }
+  
+  .w200 { width: 200px; }
+  
+  .w220 { width: 220px; }
+  
+  .w270 { width: 270px; }
+  
+  .w300 { width: 300px; }
+  
+  .w390 { width: 390px; }
+  
+  .w400 { width: 400px; }
+  
+  .w440 { width: 440px; }
+  
+  .w460 { width: 460px; }
+  
+  .w480 { width: 480px; }
+  
+  .w600 { width: 600px; }
+  
+  .w800 { width: 800px; }
+  
+  /* Hide select scrollbar for Chrome, Safari and Opera */
+  .scrollbar-hidden::-webkit-scrollbar { display: none; }
+    
+    /* Hide select scrollbar for IE, Edge add Firefox */
+  .scrollbar-hidden {
+      -ms-overflow-style: none;
+      scrollbar-width: none; /* Firefox */
+  }
+  
+    /* id */
+    #overlay {
+      position: fixed;
+      height: 100%;
+      width: 100%;
+      z-index: 1;
+      background: url('../images/semitransbgd.jpg');
+    }

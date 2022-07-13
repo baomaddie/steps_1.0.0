@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="./static/admin.css">
+    <script src="./static/jquery-3.6.0.js"></script>
+    <script src="./static/admin.js"></script>
+    <link rel="icon" type="image/x-icon" href="./static/favicon.ico">
+</head>
+
+<body class=' brnr baf bpc bc1' style="background-image: url('./static/stepsteam.jpg');">
+    <div class="bdr h50 df aic br25 bcp bsstd">
+        <img src="./static/baologo.png" class="w200 h50 pl20">
+        <label id='lblSteps' class="pl40 fs30"><i>STEPS</i></label>
+        <label id='lbl' class="pl40 fs25">Admin</label>
+    </div>
+    <div class="h350">
+        <table class="aic ma mt50">
+
+            <tr>
+                <td>
+                    <button id="btnList">User List</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button id="btnCreate">Create User Table</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button id="btnDelete">Delete User Table</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="divConfirm" class="Msg bcw bsstd">
+        <input id="txtId"  type="text" hidden />
+        <table class="ma pb20">
+            <tr class="tac">
+                <td colspan="2" class="tac pt20 pb20">
+                    <label id="lblConfirm" class="fs30" ></label>
+                </td>
+            </tr>
+            <tr class="tac">
+                <td class="pl10 pr10">
+                    <input id="btnYes" type="button" class="w100 h50 fs30" value="Yes" />
+                </td>
+                <td class="pl10 pr10">
+                    <input id="btnNo"  type="button" class="w100 h50 fs30" value="No" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="divMessage" class="Msg bcw bsstd">
+        <table class="ma pb20">
+            <tr class="tac">
+                <td colspan="2" class="tac pt20 pb20">
+                    <label id="lblMessage" class="fs30">message here.</label>
+                </td>
+            </tr>
+            <tr class="tac">
+                <td class="pl10 pr10">
+                    <input id="btnOk" type="button" class="w100 h50 fs30" value="OK" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

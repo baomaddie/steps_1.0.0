@@ -1,0 +1,245 @@
+/* html elements */
+body,
+select,
+label,
+input {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+/* classes */
+.aic {
+  align-items: center;
+}
+
+.baf {
+  background-attachment: fixed;
+}
+
+.bc1 {
+  background-color: rgb(165, 190, 235);
+}
+
+.bcb {
+  background-color: rgb(165, 190, 235);
+}
+
+.bcp {
+  background-color: #eba3a3;
+}
+
+.bcw {
+  background-color: white;
+}
+
+.bdr {
+  border: solid 1px black;
+}
+
+.bdrg {
+  border: solid 1px rgb(100, 100, 100);
+}
+
+.biurl {
+  background-image: url("./static/stepsteam.jpg");
+}
+
+.blcr50 {
+  border-bottom-left-radius: 50px;
+}
+
+.bpc {
+  background-position: center;
+}
+
+.br10 {
+  border-radius: 10px;
+}
+
+.br25 {
+  border-radius: 25px;
+}
+
+.brcr50 {
+  border-bottom-right-radius: 50px;
+}
+
+.brnr {
+  background-repeat: no-repeat;
+}
+
+.bsstd {
+  box-shadow: 3px 3px 5px rgb(127, 127, 127);
+}
+
+.df {
+  display: flex;
+}
+
+.divMessage {
+  border: solid 1px black;
+  border-radius: 5px;
+  width: 300px;
+  height: 175px;
+  font-size: 30px;
+  position: fixed;
+  top: 50%;
+  left: 48%;
+  margin-top: -100px;
+  margin-left: -100px;
+  display: none;
+  z-index: 2;
+}
+
+.fs20 {
+  font-size: 20px;
+}
+
+.fs25 {
+  font-size: 25px;
+}
+
+.fs30 {
+  font-size: 30px;
+}
+
+.h20 {
+  height: 20px;
+}
+
+.h50 {
+  height: 50px;
+}
+
+.h100 {
+  height: 100px;
+}
+
+.h150 {
+  height: 150px;
+}
+
+.h175 {
+  height: 175px;
+}
+
+.h200 {
+  height: 200px;
+}
+
+.l1 {
+  left: 1px;
+}
+
+.l25 {
+  left: 25px;
+}
+
+.m10 {
+  margin: 10px;
+}
+
+.m20 {
+  margin: 20px;
+}
+
+.ma {
+  margin: auto;
+}
+
+.mt20 {
+  margin-top: 20px;
+}
+
+.mt50 {
+  margin-top: 50px;
+}
+
+.mt100 {
+  margin-top: 100px;
+}
+
+.pa {
+  position: absolute;
+}
+
+.pb20 {
+  padding-bottom: 20px;
+}
+
+.pf {
+  position: fixed;
+}
+
+.pl20 {
+  padding-left: 20px;
+}
+
+.pl40 {
+  padding-left: 40px;
+}
+
+.pt20 {
+  padding-top: 20px;
+}
+
+.pt30 {
+  padding-top: 30px;
+}
+
+.r20 {
+  right: 20px;
+}
+
+.t15 {
+  top: 15px;
+}
+
+.tac {
+  text-align: center;
+}
+
+.tlcr50 {
+  border-top-left-radius: 50px;
+}
+
+.trcr50 {
+  border-top-right-radius: 50px;
+}
+
+.w20 {
+  width: 20px;
+}
+
+.w100 {
+  width: 100px;
+}
+
+.w200 {
+  width: 200px;
+}
+
+.w300 {
+  width: 300px;
+}
+
+.w500 {
+  width: 500px;
+}
+
+.w550 {
+  width: 550px;
+}
+
+.w1000 {
+  width: 1000px;
+}
+
+/* id */
+
+#overlay {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  background: url("../images/semitransbgd.jpg");
+}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel='stylesheet' type='text/css' href='./static/userslist.css'>
+    <!-- <script src="./static/jquery-3.6.0.js"></script> -->
+    <script src="./static/userslist.js"></script>
+    <link rel='icon' type='image/x-icon' href='./static/favicon.ico'>
+</head>
+
+<body class='brnr baf bpc bc1' style='background-image: url("./static/stepsteam.jpg");'>
+    <div class='bdr h50 df aic br25 bcp bsstd'>
+        <img src='./static/baologo.png' class='w200 h50 pl20'>
+        <label class='pl40 fs30'><i>STEPS</i></label>
+        <label class='pl40 fs25'>User List</label>
+    </div>
+    <div class="h125">
+        <table class="aic ma mt50">
+            <tr>
+                <td>        
+                    <button id="btnAdmin">Admin Menu</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id='divView' class="pt30">
+
+        <table id='tblUsers' class='bs0 ma bcw bsstd'>
+            <thead>
+                <tr class='bdr'>
+                    <th class='bdr p10'>Action</th>
+                    <th class='bdr p10'>ID</th>
+                    <th class='bdr p10'>Username</th>
+                    <th class='bdr p10'>Password</th>
+                </tr>
+            </thead>
+            <tbody class='text-center'>
+                <% rows.forEach(function(row) { %>
+                    <tr id="trUser-<%= row.ID %>">
+                        <td class='bdr p10'>
+                            <input type='button' id='edit-<%= row.ID %>' value='Edit' />
+                            <input type='button' id='delete-<%= row.ID %>' value='Delete' />
+                        </td>
+                        <td class='bdr p10 w90 tac'>
+                            <%= row.ID %>
+                        </td>
+                        <td class='bdr p10 w150'>
+                            <label><%= row.username %></label>
+                        </td>
+                        <td class='bdr p10 w150'>
+                            <label><%= row.password %></label>
+                        </td>
+                    </tr>
+                    <% }); %>
+                    <tr id="trUser-0">
+                        <td class='bdr p10 tac'>
+                            <input type='button' id='add-0' value='Add'></input>
+                        </td>
+                        <td class='bdr p10 w90 tac'></td>
+                        <td class='bdr p10 w150'></td>
+                        <td class='bdr p10 w150'></td>
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="divDelete" class="Msg bcw bsstd">
+        <input id="txtDelId" type="text" hidden/>
+        <table class="ma pb20">
+            <tr class="tac">
+                <td colspan="2" class="tac pt20 pb20">
+                    <label id="lblMessage" class="fs30">Delete?</label>
+                </td>
+            </tr>
+            <tr class="tac">
+                <td class="pl10 pr10">
+                    <input id="btnYes-0" type="button" class="w100 h50 fs30" value="Yes" />
+                </td>
+                <td class="pl10 pr10">
+                    <input id="btnNo-0"  type="button" class="w100 h50 fs30" value="No" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

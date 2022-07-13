@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- <script src="./static/jquery-3.6.0.js"></script> this is commented out because it breaks document.ready()-->
+    <link rel='stylesheet' type='text/css' href='./static/list.css'>
+    <link rel='icon' type='image/x-icon' href='./static/favicon.ico'>
+</head>
+
+<body class='brnr baf bpc bc1' style='background-image: url("./static/stepsteam.jpg");'>
+    <div class='bdr h50 df aic br25 bcp bsstd'>
+        <img src='./static/baologo.png' class='w200 h50 pl20'>
+        <label class='pl40 fs30'><i>STEPS</i></label>
+        <label class='pl40 fs25'>Patient List</label>
+        <div class='pa w100 h50 r20'>
+            <img class='pa w20 h20 t15 l1' src='./static/user.png'>
+            <label id='userId' class='pa t15 l25'></label>
+        </div>
+    </div>
+    <div class='w1000 h150 ma tac mt20'>
+        <button id='enter'  class='w200 h100 fs20 tlcr50 blcr50 bdrg bsstd'><i>Enter Serology Form</i></button>
+        <button id='main'   class='w200 h100 fs20 bdrg bsstd'><i>Main Menu</i></button>
+        <button id='upload' class='w200 h100 fs20 bdrg bsstd'><i>Upload Patient List</i></button>
+        <button id='logout' class='w200 h100 fs20 trcr50 brcr50 bdrg bsstd'><i>Logout</i></button>
+    </div>
+    <div id='divView'>
+        <table class='bs0 ma bcw bsstd'>
+            <thead>
+                <tr class='bdr'>
+                    <th class='bdr p10'>Action</th>
+                    <th class='bdr p10'>Date Tested</th>
+                    <th class='bdr p10'>Last Name</th>
+                    <th class='bdr p10'>First Name</th>
+                    <th class='bdr p10'>MI</th>
+                    <th class='bdr p10'>DOB</th>
+                    <th class='bdr p10'>Phone</th>
+                    <th class='bdr p10'>Address</th>
+                    <th class='bdr p10'>City</th>
+                    <th class='bdr p10'>State</th>
+                    <th class='bdr p10'>Zip</th>
+                    <th class='bdr p10'>Counselor</th>
+                    <th class='bdr p10'>Testing Venue</th>
+                </tr>
+            </thead>
+            <tbody class='text-center'>
+                <% rows.forEach(function(row) { %>
+                    <tr>
+                        <td class='bdr p10'><input type=button id='<%= row.ID %>' value='Edit'></input></td>
+                        <td class='bdr p10 w90'>
+                            <%= row.d1 %>
+                        </td>
+                        <td class='bdr p10 w150'>
+                            <%= row.t2 %>
+                        </td>
+                        <td class='bdr p10 w150'>
+                            <%= row.t1 %>
+                        </td>
+                        <td class='bdr p10'>
+                            <%= row.t3 %>
+                        </td>
+                        <td class='bdr p10 w90'>
+                            <%= row.d2 %>
+                        </td>
+                        <td class='bdr p10 w150'>
+                            <%= row.p1 %>
+                        </td>
+                        <td class='bdr p10 w200'>
+                            <%= row.t4 %>
+                        </td>
+
+                        <td class='bdr p10 w150'>
+                            <%= row.t5 %>
+                        </td>
+                        <td class='bdr p10'>
+                            <%= row.s1 %>
+                        </td>
+                        <td class='bdr p10 w80'>
+                            <%= row.t7 %>
+                        </td>
+                        <td class='bdr p10 w150'>
+                            <%= row.t12 %>
+                        </td>
+                        <td class='bdr p10 w150'>
+                            <%= row.t13 %>
+                        </td>
+                    </tr>
+                    <% }); %>
+            </tbody>
+        </table>
+    </div>
+    <div id='divLogout' class='Msg bsstd'>
+        <table class='ma pb20'>
+            <tr class='tac'>
+                <td colspan='2' class='tac pt30 pb20'>
+                    <label id='lblMessage' class='fs30'>Logout of <i>STEPS</i></label>
+                </td>
+            </tr>
+            <tr class='tac'>
+                <td class='pl10 pr10'>
+                    <button id='btnYes' class='w100 h50 fs30' value='Yes' onclick='logoutConfirmed();''>Yes</button>
+                </td>
+                <td class='pl10 pr10'>
+                    <button id='btnNo' class='w100 h50 fs30' value='No' onclick='logoutCancelled();''>No</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script>
+
+    var logoutConfirmed = () => {
+        overlay.remove();
+        $('#divLogout').hide();
+        if (localStorage.getItem('login') !== null) {
+            localStorage.removeItem('login');
+        }
+        location.href = '/login';
+    }
+
+    var logoutCancelled = () => {
+        overlay.remove();
+        $('#divLogout').fadeOut(fadeSpeed);
+    }
+
+    $(() => {
+        //verify login
+        if (sessionStorage.getItem('login') == null) {
+            location.href = '/login';
+        } else {
+            $('#userId').text(sessionStorage.getItem('login'));
+        }
+
+        //for the edit buttons
+        $('input').on('click', (elem) => {
+            location.href = '/edit?id=' + elem.target.id;
+        });
+            
+        //enter serology form
+        $('#enter').on('click', () => {
+            location.href = '/entry?id=0';
+        });
+
+        //main menu
+        $('#main').on('click', () => {
+            location.href = '/main';
+        });
+
+        //upload
+        $('#upload').on('click', () => {
+            $.get('/upload', (html) => {
+                document.open();
+                document.write(html); //to client
+            });
+        });
+            
+        //Logout
+        $('#logout').on('click', () => {
+            //logout code here
+            overlay = $('<div><img src="./static/semigray2.png" style="width: 100%; height: 100%;"></div>').prependTo('body').attr('id', 'overlay');
+            $('#divLogout').fadeIn(fadeSpeed);
+        });
+    });
+    </script>
+</body>
+
+</html>

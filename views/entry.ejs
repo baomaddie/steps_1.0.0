@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="./static/entry.css">
+    </link>
+    <script src="./static/jquery-3.6.0.js"></script>
+    <script src="./static/entry.js"></script>
+    <script src="./static/signature_pad.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="./static/favicon.ico">
+    </link>
+</head>
+
+<body class='brnr baf bpc bcb' style="background-image: url('./static/stepsteam.jpg');">
+
+    <!-- These are entry points for the edit screen. these values are needed for configuration behavior of screen objects -->
+    <div hidden>
+        <input id='id' value='<%= row.ID %>' />
+        <input id='mode' value='<%= mode %>' />
+        <input id='se1' value='<%= row.s1 %>' />
+        <input id='cve1' value='<%= row.cv1 %>' />
+    </div>
+    <div class="bdr h50 df aic br25 bcp bsstd">
+        <img src="./static/baologo.png" class="w200 h50 pl20">
+        <label class="pl40 fs30" id='lblSteps'><i>STEPS</i></label>
+        <label class="pl40 fs25" id='lblSerology'>Serology Form</label>
+        <div class="pa w100 h50 r20" >
+            <img class="pa w20 h20 t15 l1" src="./static/user.png">
+            <label id="userId" class="pa t15 l25"></label>
+        </div>
+    </div>
+    <div class="divform">
+        <div class='divFull mt10 bsstd'>
+            <table>
+                <tr>
+                    <td class="tar pr10">
+                        <label>Today's Date*:</label>
+                    </td>
+                    <td>
+                        <input name="today" id="d1" type="date" onchange="keypressed('d1');" value="<%= row.d1 %>" />
+                    </td>
+                    <td class="tar pr10 pl10">
+                        <label>Phone Number:</label>
+                    </td>
+                    <td>
+                        <input name="phn" id="p1" type="tel" placeholder="123-555-1212" onkeypress="keypressed('p1');"
+                            value="<%= row.p1 %>" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tar pr10">
+                        <label>First Name*:</label>
+                    </td>
+                    <td>
+                        <input name="fname" id="t1" type="text" class="w300" maxlength="40"
+                            onkeypress="keypressed('t1');" placeholder="John or Jane" value="<%= row.t1 %>" />
+                    </td>
+                    <td class="tar pr10 pl10">
+                        <label>Last Name*:</label>
+                    </td>
+                    <td>
+                        <input name="lname" id="t2" type="text" class="w300" maxlength="40"
+                            onkeypress="keypressed('t2');" placeholder="Doe" value="<%= row.t2 %>" />
+                    </td>
+                    <td class="tar pr10 pl10">
+                        <label>MI:</label>
+                    </td>
+                    <td>
+                        <input name="mi" id="t3" type="text" maxlength="1" class="w25" placeholder="X"
+                            value="<%= row.t3 %>" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tar pr10">
+                        <label>Address*:</label>
+                    </td>
+                    <td>
+                        <input name="addr1" id="t4" type="text" class="w300" maxlength="40"
+                            onkeypress="keypressed('t4');" placeholder="123 Anywhere St." value="<%= row.t4 %>" />
+                    </td>
+                    <td class="tar pr10 pl10">
+                        <label>City*:</label>
+                    </td>
+                    <td>
+                        <input name="city" id="t5" type="text" class="w300" maxlength="40"
+                            onkeypress="keypressed('t5');" placeholder="Myhometown" value="<%= row.t5 %>" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tar pr10">
+                        <label>Line 2:</label>
+                    </td>
+                    <td>
+                        <input name="addr2" id="t6" type="text" class="w300" maxlength="40" value="<%= row.t6 %>" />
+                    </td>
+                    <td class="tar pr10 pl10">
+                        <label>State*:</label>
+                    </td>
+                    <td>
+                        <select name="state" id="s1" class="bcw" onclick="keypressed('s1');"
+                            value="<%= row.s1 %>"></select>
+                        <label class="pl20 pr10">Zip*:</label>
+                        <input name="zip" id="t7" type="text" maxlength="20" class="w80" onkeypress="keypressed('t7');"
+                            value="<%= row.t7 %>" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tar pr10">
+                        <label>Date of Birth*:</label>
+                    </td>
+                    <td>
+                        <input name="dob" id="d2" type="date" onchange="keypressed('d2');" value="<%= row.d2 %>" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tar pr10">
+                        <label>Email Address:</label>
+                    </td>
+                    <td>
+                        <input name="email" id="t8" type="text" class="w300" maxlength="40"
+                            onkeypress="keypressed('t8');" placeholder="name@example.com" value="<%= row.t8 %>" />
+                    </td>
+                </tr>
+            </table>
+            <div class="pt20">
+                <table>
+                    <tr>
+                        <td class="pr10 tar">
+                            <label>Preferred Name (If different from legal name listed above):</label>
+                        </td>
+                        <td class="pr10" colspan="2">
+                            <input name="pname" id="t9" type="text" class="w200" maxlength="40" value="<%= row.t9 %>" />
+                        </td>
+                    </tr>
+                    <tr class="pt10">
+                        <td>
+                            <label>Is it OK to leave a message on the phone number provided above?*</label>
+                        </td>
+                        <td id="tdMsg">
+
+                            <input id="r1" name="msg" type="radio" <%=row.r1==='true' ? 'checked' : '' %>/>
+                            <label for="r1">Yes</label>
+                            <input id="r2" name="msg" type="radio" <%=row.r2==='true' ? 'checked' : '' %>/>
+                            <label for="r2">No</label>
+                        </td>
+                        <td class="w390 tar">
+                            <label>* Indicates a required field</label>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="divFull mt10 bsstd">
+            <div>
+                <table>
+                    <tr>
+                        <td class="pl20">
+                            <label><b>Assigned Sex:</b></label>
+                        </td>
+                        <td>
+                            <input type="radio" name="sex" id="r3" <%=row.r3==='true' ? 'checked' : '' %>/>
+                            <label for="r3">Male</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="sex" id="r4" <%=row.r4==='true' ? 'checked' : '' %>/>
+                            <label for="r4">Female</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pl20">
+                            <label><b>Current Gender:</b></label>
+                        </td>
+                        <td>
+                            <input type="radio" name="gender" id="r5" <%=row.r5==='true' ? 'checked' : '' %>/>
+                            <label for="r5">Male</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="gender" id="r6" <%=row.r6==='true' ? 'checked' : '' %>/>
+                            <label for="r6">Female</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="gender" id="r7" <%=row.r7==='true' ? 'checked' : '' %>/>
+                            <label for="r7">Transgender (M to F)</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="gender" id="r8" <%=row.r8==='true' ? 'checked' : '' %>/>
+                            <label for="r8">Transgender (F to M)</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="gender" id="r9" <%=row.r9==='true' ? 'checked' : '' %>/>
+                            <label for="r9">Non-Binary</label>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="mt10 df">
+            <div class="divHalf bsstd">
+                <table>
+                    <tr>
+                        <td class="pl20" colspan="2">
+                            <label><b>Race (check all that apply):</b></label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="race" id="c1" <%=row.c1==='true' ? 'checked' : '' %>/>
+                            <label for="c1">Black/African American</label>
+                        </td>
+                        <td>
+                            <input type="checkbox" name="race" id="c2" <%=row.c2==='true' ? 'checked' : '' %>/>
+                            <label for="c2">White</label>
+                        </td>
+                        <td>
+                            <input type="checkbox" name="race" id="c3" <%=row.c3==='true' ? 'checked' : '' %>/>
+                            <label for="c3">Asian</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="race" id="c4" <%=row.c4==='true' ? 'checked' : '' %>/>
+                            <label for="c4">Pacific Islander</label>
+                        </td>
+                        <td colspan="2">
+                            <input type="checkbox" name="race" id="c5" <%=row.c5==='true' ? 'checked' : '' %>/>
+                            <label for="c5">American Indian/Alaskan Native</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="race" id="c6" <%=row.c6==='true' ? 'checked' : '' %>/>
+                            <label for="c6">Unknown</label>
+                        </td>
+                        <td>
+                            <input type="checkbox" name="race" id="c7" <%=row.c7==='true' ? 'checked' : '' %>/>
+                            <label for="c7">Prefer Not to Answer</label>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="divHalf ml10 bsstd">
+                <table>
+                    <tr>
+                        <td class="pl20" colspan="2">
+                            <label><b>Ethnicity (check one):</b></label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="radio" name="ethnicity" id="r10" <%=row.r10==='true' ? 'checked' : '' %>/>
+                            <label for="r10">Hispanic</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="ethnicity" id="r11" <%=row.r11==='true' ? 'checked' : '' %>/>
+                            <label for="r11">Not Hispanic or Latino</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="radio" name="ethnicity" id="r12" <%=row.r12==='true' ? 'checked' : '' %>/>
+                            <label for="r12">Unknown</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="ethnicity" id="r13" <%=row.r13==='true' ? 'checked' : '' %>/>
+                            <label for="r13">Prefer Not to Answer</label>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="mt10 df">
+            <div class="divHalf bsstd">
+                <table>
+                    <tr>
+                        <td class="pl20 tac" colspan="3">
+                            <label><b>History and Risk Assessment:</b></label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pl20 pt20" colspan="3">
+                            <label><b>In the past FIVE YEARS, have you done any of the following?</b></label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pl20 pt10">
+                            <label>Had oral, anal, or vaginal sex with a male?</label>
+                        </td>
+                        <td class="w70 pt10">
+                            <input type="radio" name="vsm" id="r14" <%=row.r14==='true' ? 'checked' : '' %>/>
+                            <label for="r14">Yes</label>
+                        </td>
+                        <td class="w70 pt10">
+                            <input type="radio" name="vsm" id="r15" <%=row.r15==='true' ? 'checked' : '' %>/>
+                            <label for="r15">No</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pl20 pt10">
+                            <label>Had oral, anal, or vaginal sex with a female?</label>
+                        </td>
+                        <td class="pt10">
+                            <input type="radio" name="vsf" id="r16" <%=row.r16==='true' ? 'checked' : '' %>/>
+                            <label for="r16">Yes</label>
+                        </td>
+                        <td class="pt10">
+                            <input type="radio" name="vsf" id="r17" <%=row.r17==='true' ? 'checked' : '' %>/>
+                            <label for="r17">No</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pl20 pt10">
+                            <label>Had oral, anal, or vaginal sex with a person who is transgender?</label>
+                        </td>
+                        <td class="pt10">
+                            <input type="radio" name="vst" id="r18" <%=row.r18==='true' ? 'checked' : '' %>/>
+                            <label for="r18">Yes</label>
+                        </td>
+                        <td class="pt10">
+                            <input type="radio" name="vst" id="r19" <%=row.r19==='true' ? 'checked' : '' %>/>
+                            <label for="r19">No</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pl20 pt10">
+                            <label>Had receptive anal sex?</label>
+                        </td>
+                        <td class="pt10">
+                            <input type="radio" name="ras" id="r20" <%=row.r20==='true' ? 'checked' : '' %>/>
+                            <label for="r20">Yes</label>
+                        </td>
+                        <td class="pt10">
+                            <input type="radio" name="ras" id="r21" <%=row.r21==='true' ? 'checked' : '' %>/>
+                            <label for="r21">No</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pl20 pt10">
+                            <label>Used injection drugs, including steroids?</label>
+                        </td>
+                        <td class="pt10">
+                            <input type="radio" name="inj" id="r22" <%=row.r22==='true' ? 'checked' : '' %>/>
+                            <label for="r22">Yes</label>
+                        </td>
+                        <td class="pt10">
+                            <input type="radio" name="inj" id="r23" <%=row.r23==='true' ? 'checked' : '' %>/>
+                            <label for="r23">No</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pl20 pt10">
+                            <label>Had sex with someone who uses injection drugs?</label>
+                        </td>
+                        <td class="pt10">
+                            <input type="radio" name="injd" id="r24" <%=row.r24==='true' ? 'checked' : '' %>/>
+                            <label for="r24">Yes</label>
+                        </td>
+                        <td class="pt10">
+                            <input type="radio" name="injd" id="r25" <%=row.r25==='true' ? 'checked' : '' %>/>
+                            <label for="r25">No</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pl20 pt10">
+                            <label>Had sex with someone who is HIV positive?</label>
+                        </td>
+                        <td class="pt10">
+                            <input type="radio" name="hiv" id="r26" <%=row.r26==='true' ? 'checked' : '' %>/>
+                            <label for="r26">Yes</label>
+                        </td>
+                        <td class="pt10">
+                            <input type="radio" name="hiv" id="r27" <%=row.r27==='true' ? 'checked' : '' %>/>
+                            <label for="r27">No</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pl20 pt10">
+                            <label>Had sex while intoxicated or high?</label>
+                        </td>
+                        <td class="pt10">
+                            <input type="radio" name="tox" id="r28" <%=row.r28==='true' ? 'checked' : '' %>/>
+                            <label for="r28">Yes</label>
+                        </td>
+                        <td class="pt10">
+                            <input type="radio" name="tox" id="r29" <%=row.r29==='true' ? 'checked' : '' %>/>
+                            <label for="r29">No</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pl20 pt10">
+                            <label>Exchanged sex for money, drugs, or something of need?</label>
+                        </td>
+                        <td class="pt10">
+                            <input type="radio" name="exc" id="r30" <%=row.r30==='true' ? 'checked' : '' %>/>
+                            <label for="r30">Yes</label>
+                        </td>
+                        <td class="pt10">
+                            <input type="radio" name="exc" id="r31" <%=row.r31==='true' ? 'checked' : '' %>/>
+                            <label for="r31">No</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pl20 pt10" colspan="3">
+                            <label>When was the last time you had unprotected sex?</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="pl20">
+                            <input name="unprotectedsex" id="t10" type="text" class="w400" maxlength="40"
+                                value="<%= row.t10 %>" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pl20 pt20" colspan="3">
+                            <label><b>Have you <u>ever</u> done any of the following? (Check <u>yes</u> or
+                                    <u>no</u>)</b></label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tar pr10">
+                            <label>Been tested for HIV?</label>
+                        </td>
+                        <td class="pt10">
+                            <input type="radio" name="thiv" id="r32" <%=row.r32==='true' ? 'checked' : '' %>/>
+                            <label for="r32">Yes</label>
+                        </td>
+                        <td class="pt10">
+                            <input type="radio" name="thiv" id="r33" <%=row.r33==='true' ? 'checked' : '' %>/>
+                            <label for="r33">No</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tar pr10 pt10">
+                            <label>Participated in an HIV study?</label>
+                        </td>
+                        <td class="pt10">
+                            <input type="radio" name="shiv" id="r34" <%=row.r34==='true' ? 'checked' : '' %>/>
+                            <label for="r34">Yes</label>
+                        </td>
+                        <td class="pt10">
+                            <input type="radio" name="shiv" id="r35" <%=row.r35==='true' ? 'checked' : '' %>/>
+                            <label for="r35">No</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pl20" colspan="3">
+                            <label>If yes, when and where?</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="pl20">
+                            <input name="vacstudyyes" id="t11" type="text" class="w400" maxlength="40"
+                                value="<%= row.t11 %>" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tar pr10 pt10">
+                            <label>Have you ever heard of PrEP (Pre-Exposure Prophylaxis)?</label>
+                        </td>
+                        <td class="pt10">
+                            <input type="radio" name="prep" id="r36" <%=row.r36==='true' ? 'checked' : '' %>/>
+                            <label for="r36">Yes</label>
+                        </td>
+                        <td class="pt10">
+                            <input type="radio" name="prep" id="r37" <%=row.r37==='true' ? 'checked' : '' %>/>
+                            <label for="r37">No</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tar pr10 pt10">
+                            <label>Are you currently taking daily PrEP medication?</label>
+                        </td>
+                        <td class="pt10">
+                            <input type="radio" name="dprep" id="r38" <%=row.r38==='true' ? 'checked' : '' %>/>
+                            <label for="r38">Yes</label>
+                        </td>
+                        <td class="pt10">
+                            <input type="radio" name="dprep" id="r39" <%=row.r39==='true' ? 'checked' : '' %>/>
+                            <label for="r39">No</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tar pr10 pt10">
+                            <label>Have you used PrEP anytime in the past 12 months?</label>
+                        </td>
+                        <td class="pt10">
+                            <input type="radio" name="p12" id="r40" <%=row.r40==='true' ? 'checked' : '' %>/>
+                            <label for="r40">Yes</label>
+                        </td>
+                        <td class="pt10">
+                            <input type="radio" name="p12" id="r41" <%=row.r41==='true' ? 'checked' : '' %>/>
+                            <label for="r41">No</label>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="divOfficial" class="divHalf ml10 bsstd">
+                <table>
+                    <tr>
+                        <td class="tac bdr w460 bgs" colspan="2">
+                            <label><b>OFFICIAL USE ONLY:</b></label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tar pr10 pt10">
+                            <label>Counselor collecting data:</label>
+                        </td>
+                        <td class="pt10">
+                            <input name="counselor" id="t12" type="text" class="w270" maxlength="40"
+                                value="<%= row.t12 %>" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tar pr10 pt10">
+                            <label>Testing Venue:</label>
+                        </td>
+                        <td class="pt10">
+                            <input name="venue" id="t13" type="text" class="w270" maxlength="40"
+                                value="<%= row.t13 %>" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tar pt20 pr10">
+                            <label><b>Type of test:</b></label>
+                        </td>
+                        <td class="pt20">
+                            <input type="radio" name="tst" id="r42" <%=row.r42==='true' ? 'checked' : '' %>"/>
+                            <label for="r42" class="pr10">OraQuick</label>
+                            <input type="radio" name="tst" id="r43" <%=row.r43==='true' ? 'checked' : '' %>/>
+                            <label for="r43" class="pr10">Insti</label>
+                            <input type="radio" name="tst" id="r44" <%=row.r44==='true' ? 'checked' : '' %>/>
+                            <label for="r44">Alere</label>
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td class="pt20" colspan="3">
+                            <label><b>STI Screening</b> (check all that apply):</label>
+                        </td>
+
+                        <td class="pt20 pl40">
+                            <label><b>Samples:</b></label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="w30"></td>
+                        <td class="w140">
+                            <input type="checkbox" id="c8" <%=row.c8==='true' ? 'checked' : '' %>/>
+                            <label for="c8">HIV</label>
+                        </td>
+                        <td>
+                            <input type="checkbox" id="c9" <%=row.c9==='true' ? 'checked' : '' %>/>
+                            <label for="c9">Gonorrhea (GC)</label>
+                        </td>
+                        <td class="pl40">
+                            <input type="checkbox" id="c10" <%=row.c10==='true' ? 'checked' : '' %>/>
+                            <label for="c10">Urine</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="checkbox" id="c11" <%=row.c11==='true' ? 'checked' : '' %>/>
+                            <label for="c11">Chlamydia (CT)</label>
+                        </td>
+                        <td>
+                            <input type="checkbox" id="c12" <%=row.c12==='true' ? 'checked' : '' %>/>
+                            <label for="c12">Hepatitis C (HCV)</label>
+                        </td>
+                        <td class="pl40">
+                            <input type="checkbox" id="c13" <%=row.c13==='true' ? 'checked' : '' %>/>
+                            <label for="c13">Anal</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="checkbox" id="c14" <%=row.c14==='true' ? 'checked' : '' %>/>
+                            <label for="c14">Trich (TV)</label>
+                        </td>
+                        <td>
+                            <input type="checkbox" id="c15" <%=row.c15==='true' ? 'checked' : '' %>/>
+                            <label for="c15">Syphilis</label>
+                        </td>
+                        <td class="pl40">
+                            <input type="checkbox" id="c16" <%=row.c16==='true' ? 'checked' : '' %>/>
+                            <label for="c16">Vaginal</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="pl40">
+                            <input type="checkbox" id="c17" <%=row.c17==='true' ? 'checked' : '' %>/>
+                            <label for="c17">Throat</label>
+                        </td>
+                    </tr>
+                </table>
+                <div class="bdr mt20 w480 h550 bgs">
+                    <table>
+                        <tr>
+                            <td class="w175 pt10 pl20">
+                                <label><b>HIV Test Results</b></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input type="radio" name="hivtstres" id="r45" <%=row.r45==='true' ? 'checked' : '' %>/>
+                                <label for="r45">Nonreactive</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input type="radio" name="hivtstres" id="r46" <%=row.r46==='true' ? 'checked' : '' %>"/>
+                                <label for="r46">Preliminary Positive</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input type="radio" name="hivtstres" id="r47" <%=row.r47==='true' ? 'checked' : '' %>/>
+                                <label for="r47">Unsatisfactory</label>
+                            </td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td class="w175 pt10 pl20">
+                                <label><b>For Alere reactive results</b></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input type="radio" name="alere" id="r48" <%=row.r48==='true' ? 'checked' : '' %>/>
+                                <label for="r48">Antigen only</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input type="radio" name="alere" id="r49" <%=row.r49==='true' ? 'checked' : '' %>/>
+                                <label for="r49">Antibody Only</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input type="radio" name="alere" id="r50" <%=row.r50==='true' ? 'checked' : '' %>/>
+                                <label for="r50">Antigen/Antibody</label>
+                            </td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td class="pt10 pb10 pl20" colspan="6">
+                                <label><b>STI test results</b> (check positive results):</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="w50"></td>
+                            <td class="w70">
+                                <input id="c18" type="checkbox" <%=row.c18==='true' ? 'checked' : '' %>/>
+                                <label>CT</label>
+                            </td>
+                            <td class="w70">
+                                <input id="c19" type="checkbox" <%=row.c19==='true' ? 'checked' : '' %>/>
+                                <label>GC</label>
+                            </td>
+                            <td class="w70">
+                                <input id="c20" type="checkbox" <%=row.c20==='true' ? 'checked' : '' %>/>
+                                <label>TV</label>
+                            </td>
+                            <td class="w70">
+                                <input id="c21" type="checkbox" <%=row.c21==='true' ? 'checked' : '' %>/>
+                                <label>Syph</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="w50"></td>
+                            <td class="w70">
+                                <select id="s2" class="scrollbar-hidden" disabled multiple>
+                                    <option id="s20" title="PC: ctrl-click, iPad: cmd-click to select" <%=row.s20 %>
+                                        >Urine
+                                    </option>
+                                    <option id="s21" title="PC: ctrl-click, iPad: cmd-click to select" <%=row.s21 %>
+                                        >Anal
+                                    </option>
+                                    <option id="s22" title="PC: ctrl-click, iPad: cmd-click to select" <%=row.s22 %>
+                                        >Vaginal</option>
+                                    <option id="s23" title="PC: ctrl-click, iPad: cmd-click to select" <%=row.s23 %>
+                                        >Oral
+                                    </option>
+                                </select>
+                            </td>
+                            <td class="w70">
+                                <select id="s3" class="scrollbar-hidden" disabled multiple>
+                                    <option id="s30" title="PC: ctrl-click, iPad: cmd-click to select" <%=row.s30 %>
+                                        >Urine
+                                    </option>
+                                    <option id="s31" title="PC: ctrl-click, iPad: cmd-click to select" <%=row.s31 %>
+                                        >Anal
+                                    </option>
+                                    <option id="s32" title="PC: ctrl-click, iPad: cmd-click to select" <%=row.s32 %>
+                                        >Vaginal</option>
+                                    <option id="s33" title="PC: ctrl-click, iPad: cmd-click to select" <%=row.s33 %>
+                                        >Oral
+                                    </option>
+                                </select>
+                            </td>
+                            <td class="w70">
+                                <select id="s4" class="scrollbar-hidden" disabled multiple>
+                                    <option id="s40" title="PC: ctrl-click, iPad: cmd-click to select" <%=row.s40 %>
+                                        >Urine
+                                    </option>
+                                    <option id="s41" title="PC: ctrl-click, iPad: cmd-click to select" <%=row.s41 %>
+                                        >Anal
+                                    </option>
+                                    <option id="s42" title="PC: ctrl-click, iPad: cmd-click to select" <%=row.s42 %>
+                                        >Vaginal</option>
+                                    <option id="s43" title="PC: ctrl-click, iPad: cmd-click to select" <%=row.s43 %>
+                                        >Oral
+                                    </option>
+                                </select>
+                            </td>
+                            <td class="w70">
+                                <select id="s5" class="scrollbar-hidden" disabled multiple>
+                                    <option id="s50" title="PC: ctrl-click, iPad: cmd-click to select" <%=row.s50 %>
+                                        >Urine
+                                    </option>
+                                    <option id="s51" title="PC: ctrl-click, iPad: cmd-click to select" <%=row.s51 %>
+                                        >Anal
+                                    </option>
+                                    <option id="s52" title="PC: ctrl-click, iPad: cmd-click to select" <%=row.s52 %>
+                                        >Vaginal</option>
+                                    <option id="s53" title="PC: ctrl-click, iPad: cmd-click to select" <%=row.s53 %>
+                                        >Oral
+                                    </option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td class="w175 pt10 pl20">
+                                <label><b>HCV Test Results</b></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input type="radio" name="hcvtstres" id="r51" onclick="setHCVtestResults(false);"
+                                    <%=row.r51==='true' ? 'checked' : '' %>/>
+                                <label for="r51">Nonreactive</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input type="radio" name="hcvtstres" id="r52" onclick="setHCVtestResults(true);"
+                                    <%=row.r52==='true' ? 'checked' : '' %>/>
+                                <label for="r52">Antibody Positive</label>
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="tblAPdetails">
+                        <tr>
+                            <td class="w150"></td>
+                            <td>
+                                <label id="lblhcv">Check one:</label>
+                            </td>
+                            <td>
+                                <input type="radio" name="co" id="r53" disabled="true" <%=row.r53==='true' ? 'checked'
+                                    : '' %>/>
+                                <label id="lblHCVnd" for="r53">ND</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <input type="radio" name="co" id="r54" disabled="true" <%=row.r54==='true' ? 'checked'
+                                    : '' %>/>
+                                <label id="lblHCVpdtx" for="r54">PD (TX or cleared)</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <input type="radio" name="co" id="r55" disabled="true" <%=row.r55==='true' ? 'checked'
+                                    : '' %>/>
+                                <label id="lblHCVpcnotx" for="r55">PD (No TX or reinfection)</label>
+                            </td>
+                        </tr>
+                    </table>
+                </div> <!-- for official use only -->
+            </div>
+        </div>
+        <div class="divFull mt10 bsstd">
+            <div class="ma">
+                <h3>Consent</h3>
+            </div>
+            <p class="pr20 pl20">By signing below, I understand I will be tested for HIV, HCV, and/or STIs. HIV and STI
+                testing in Alabama is confidential and
+                preliminary positive results will be reported to the Jefferson County Department of Health.
+                The benefits of taking the test include knowing my HIV//HCV/STI status, early diagnosis and medical
+                treatment. I
+                understand that this test is voluntary, and I provide informed consent to receive an HIV/HCV/STI test.
+            </p>
+            <div class="flex-row">
+                <div class="wrapper">
+                    <canvas id="cv1" width="985" height="100" class="bdr bcw" onblur="blurit();"></canvas>
+                </div>
+                <div class="clear-btn">
+                    <button id="clear" class="w100 h50 fs20"><i>Clear</i></button>
+                </div>
+            </div>
+        </div>
+        <div class="pt10">
+            <input id="btnSave" type="button" class="btnSave w600 bsstd" value="Save" onclick="validate();" />
+            <input id="btnCancel" type="button" class="btnSave w200 bsstd" value="Cancel"
+                onclick="confirm('Back to Main Menu?');" />
+            <input id="btnClear" type="button" class="btnSave w200 bsstd" value="Clear" onclick="confirm('Clear Data?');" />
+        </div>
+    </div>
+    <div id="divMsg" class="divMessage bcw bsstd">
+        <table class="ma pb20">
+            <tr class="tac">
+                <td colspan="2" class="tac pt20 pb20">
+                    <label id="lblMessage" class="fs30">Blah Blah</label>
+                </td>
+            </tr>
+            <tr class="tac">
+                <td class="pl10 pr10">
+                    <input id="btnYes" type="button" class="w100 h50 fs30" value="Yes" onclick="confirmed('yes');" />
+                </td>
+                <td class="pl10 pr10">
+                    <input id="btnNo" type="button" class="w100 h50 fs30" value="No" onclick="confirmed('no');" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="divValidate" class="divMessage bcp bsstd">
+        <table class="ma pb20">
+            <tr class="tac">
+                <td colspan="2" class="tac pt20 pb20 w800">
+                    <label id="lblValidate" class="fs30">Please provide the missing or incorrect fields.</label>
+                </td>
+            </tr>
+            <tr class="tac">
+                <td class="pl10 pr10">
+                    <input id="btnValidate" type="button" class="w100 h50 fs30" value="OK"
+                        onclick="closeValidateMsg();" />
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <script src="./static/signature.js"></script>
+</body>
+
+</html>

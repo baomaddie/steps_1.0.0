@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- <script src="./static/jquery-3.6.0.js"></script> this is commented out because it breaks document.ready()-->
+    <link rel='stylesheet' type='text/css' href='./static/upload.css'>
+    <link rel='icon' type='image/x-icon' href='./static/favicon.ico'>
+</head>
+
+<body class='brnr baf bpc bc1' style='background-image: url("./static/stepsteam.jpg");'>
+    <div class='bdr h50 df aic br25 bcp bsstd'>
+        <img src='./static/baologo.png' class='w200 h50 pl20'>
+        <label class='pl40 fs30'><i>STEPS</i></label>
+        <label class='pl40 fs25'>Upload Patient List</label>
+        <div class='pa w100 h50 r20'>
+            <img class='pa w20 h20 t15 l1' src='./static/user.png'>
+            <label id='userId' class='pa t15 l25'></label>
+        </div>
+    </div>
+    <div class='w1000 h150 ma tac mt10'>
+        <button id='main' tabindex='1' class='w200 h100 fs20 m10 mt20 tlcr50 blcr50 bdrg bsstd'><i>Main Menu</i></button>
+        <button id='logout' tabindex='2' class='w200 h100 fs20 m10 mt20 trcr50 brcr50 bdrg bsstd'><i>Logout</i></button>
+    </div>
+    <% if (row.connect) { %>
+    <div id="divUploadEnabled" class="df aic tac ma w550 h100 pl20 pr20 br10 bdrg bsstd bclitegray">
+        <p class="aic ma tac">The upload network path, <%= row.drive %>, has been established. When you click the
+                    Upload button the Serology data for the clients listed below will be uploaded to the STEPS folder on the
+                    Research drive and deleted from your iPad.</p>
+    </div>
+
+    <% if (row.connect) { %>
+        <div id='divUpload' class='bc1 br25 w300 h50 df aic ma bsstd'>
+        <% } else { %>
+        <div id='divUpload' class='bc1 br25 w300 h50 df aic ma bsstd disabledDiv'>
+        <% } %>
+            <input id='btnUpload' type='submit' class='ma bn on fs20 bcliteg' value='Upload' tabindex='3' />
+    </div>
+
+    <div id='divComplete' class='df aic tac ma w550 h100 pl20 pr20 br10 bdrg bsstd bclitegray dn'>
+        <p id="pComplete" class='tac'></p>
+    </div>
+    <div id='divView'>
+        <table id="tblData" class='bs0 ma bcw bsstd mt30'>
+            <thead>
+                <tr class='bdr'>
+                    <th class='bdr p10'>Date Tested</th>
+                    <th class='bdr p10'>Last Name</th>
+                    <th class='bdr p10'>First Name</th>
+                    <th class='bdr p10'>MI</th>
+                    <th class='bdr p10'>DOB</th>
+                </tr>
+            </thead>
+            <tbody id='tbyData' class='text-center'>
+            <% clients.forEach(function(client) { %>
+                <tr>
+                    <td class='bdr p10 w90'><%= client.d1 %></td>
+                    <td class='bdr p10 w150'><%= client.t2 %></td>
+                    <td class='bdr p10 w150'><%= client.t1 %></td>
+                    <td class='bdr p10'><%= client.t3 %></td>
+                    <td class='bdr p10 w90'><%= client.d2 %></td>
+                </tr>
+            <% }); %>
+            </tbody>
+        </table>
+    </div>
+    <% } else { %>
+    <div id="divUploadDisabled" class="df aic tac ma w550 h100 pl20 pr20 br10 bdrg bsstd bclitegray">
+        <p>The upload network path could not be established. Upload has been disabled. Please try again later.</p>
+    </div>
+    <% } %>
+    <div id='divLogout' class='msg bsstd'>
+        <table class='ma pb20'>
+            <tr class='tac'>
+                <td colspan='2' class='tac pt30 pb20'>
+                    <label id='lblMessage' class='fs30'>Logout of <i>STEPS</i></label>
+                </td>
+            </tr>
+            <tr class='tac'>
+                <td class='pl10 pr10'>
+                    <button id='btnYes' class='w100 h50 fs30' value='Yes' onclick='logout();'>Yes</button>
+                </td>
+                <td class='pl10 pr10'>
+                    <button id='btnNo' class='w100 h50 fs30' value='No' onclick='cancelled("#divLogout");'>No</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id='divProceed' class='proceed bsstd'>
+        <table class='ma pb20'>
+            <tr class='tac'>
+                <td colspan='2' class='tac pt30 pb20'>
+                    <label id='lblMessage' class='fs30'>Proceed with upload?</label>
+                </td>
+            </tr>
+            <tr class='tac'>
+                <td class='pl10 pr10'>
+                    <button id='btnYes' class='w100 h50 fs30' value='Yes' onclick='proceed();'>Yes</button>
+                </td>
+                <td class='pl10 pr10'>
+                    <button id='btnNo' class='w100 h50 fs30' value='No' onclick='cancelled("#divProceed");'>No</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    
+    <script>
+
+    //main menu
+    $('#main').on('click', () => {
+        console.log('main');
+        window.location.href = '/main';
+    });
+
+    //Logout
+    $('#logout').on('click', () => {
+        overlay = $('<div><img src="./static/semigray2.png" style="width: 100%; height: 100%;"></div>').prependTo('body').attr('id', 'overlay');
+        $('#divLogout').fadeIn(fadeSpeed);
+    });
+
+    //press ENTER is the same as clicking UPLOAD
+    $(document).keyup((event) => {
+        if (event.which==13) {
+            $('#divUpload').click();
+        }
+    });
+
+    //disable the browser and show the 'proceed to upload' message
+    $('#divUpload').on('click', () => {
+        overlay = $('<div><img src="./static/semigray2.png" style="width: 100%; height: 100%;"></div>').prependTo('body').attr('id', 'overlay');
+        $('#divProceed').fadeIn(fadeSpeed);
+    });
+
+    //proceed with upload
+    var proceed = () => {
+        overlay.remove();
+        $('#divProceed').fadeOut(fadeSpeed);
+        sendDatafile($('#userId').text());
+        $('#divUpload').css('pointer-events','none');
+        $('#divUpload').css('opacity', '0.6');
+        $("#tbyData").empty();
+    }
+
+    // log out of the STEPS system
+    var logout = () => {
+        overlay.remove();
+        $('#divLogout').fadeOut(fadeSpeed);
+        if (localStorage.getItem('login') !== null) {
+            localStorage.removeItem('login');
+        }
+        window.location.href = '/login';
+    }
+
+    // re-enable the browser and remove the screen message
+    var cancelled = (str) => {
+        overlay.remove();
+        $(str).fadeOut(fadeSpeed);
+    }
+
+    //notify the server to save the STEPS data to the Research folder
+    var sendDatafile = (userId) => {
+        $.ajax({
+            url: '/senddatafile',
+            type: 'GET',
+            dataType: 'text',
+            data: { 'userId': userId },
+            success: (res) => {
+                $('#pComplete').html('The client data was successfully uploaded to <br/>'+res+'<br/>and the residual data has been deleted from your iPad.');
+                $("#divComplete").fadeIn(fadeSpeed);
+            }
+        });
+    }
+        
+    $(() => {
+        //verify logged in
+        if (sessionStorage.getItem('login') == null) {
+            window.location.href = '/login';
+        } else {
+            $('#userId').text(sessionStorage.getItem('login'));
+        }
+        //if there are no client records, disable the upload button
+        if ($('#tblData tr').length==1) {
+            $('#divUpload').css('pointer-events','none');
+            $('#divUpload').css('opacity', '0.6');
+        }
+    });
+    </script>
+</body>
+
+</html>

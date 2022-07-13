@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="./static/main.css" />
+    <script src="./static/jquery-3.6.0.js"></script>
+    <script src="./static/main.js"></script>
+    <link rel="icon" type="image/x-icon" href="./static/favicon.ico" />
+  </head>
+
+  <body
+    class="brnr baf bpc bcb"
+    style="background-image: url('./static/stepsteam.jpg');"
+  >
+    <div class="bdr h50 df aic br25 bcp bsstd">
+      <img src="./static/baologo.png" class="w200 h50 pl20" />
+      <label class="pl40 fs30"><i>STEPS</i></label>
+      <label class="pl40 fs25">Main Menu</label>
+      <div class="pa w100 h50 r20">
+        <img class="pa w20 h20 t15 l1" src="./static/user.png" />
+        <label id="userId" class="pa t15 l25"></label>
+      </div>
+    </div>
+    <div class="w1000 h150 ma tac mt20">
+      <button id="enter" class="w200 h100 fs20 mt20 tlcr50 blcr50 bdrg bsstd">
+        <i>Enter Serology Form</i>
+      </button>
+      <button id="view" class="w200 h100 fs20 mt20 bdrg bsstd">
+        <i>View Patient List</i>
+      </button>
+      <button id="upload" class="w200 h100 fs20 mt20 bdrg bsstd">
+        <i>Upload Patient List</i>
+      </button>
+      <button id="logout" class="w200 h100 fs20 mt20 trcr50 brcr50 bdrg bsstd">
+        <i>Logout</i>
+      </button>
+    </div>
+    <div id="divLogout" class="divMessage bcw bsstd">
+      <table class="ma pb20">
+        <tr class="tac">
+          <td colspan="2" class="tac pt30 pb20">
+            <label id="lblMessage" class="fs30">Logout of <i>STEPS</i></label>
+          </td>
+        </tr>
+        <tr class="tac">
+          <td class="pl10 pr10">
+            <input
+              id="btnYes"
+              type="button"
+              class="w100 h50 fs30"
+              value="Yes"
+              onclick="logoutConfirmed();"
+            />
+          </td>
+          <td class="pl10 pr10">
+            <input
+              id="btnNo"
+              type="button"
+              class="w100 h50 fs30"
+              value="No"
+              onclick="hideLogoutMsg();"
+            />
+          </td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

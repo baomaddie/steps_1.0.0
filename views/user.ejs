@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel='stylesheet' type='text/css' href='./static/user.css'>
+    <!-- <script src="./static/jquery-3.6.0.js"></script> -->
+    <script src="./static/user.js"></script>
+    <link rel='icon' type='image/x-icon' href='./static/favicon.ico'>
+</head>
+
+<body class='brnr baf bpc bc1' style='background-image: url("./static/stepsteam.jpg");'>
+    <div class='bdr h50 df aic br25 bcp bsstd'>
+        <img src='./static/baologo.png' class='w200 h50 pl20'>
+        <label class='pl40 fs30'><i>STEPS</i></label>
+        <label class='pl40 fs25'>Edit User</label>
+        <div class='pa w100 h50 r20'>
+            <img class='pa w20 h20 t15 l1' src='./static/user.png'>
+            <label id='userId' class='pa t15 l25'></label>
+        </div>
+    </div>
+    <div id='divForm' class="divHalf ma bdr mt20">
+        <div>
+            <table>
+                <tr>
+                    <td class="tal pr20">
+                        <label id="lbl">ID</label>
+                        <label id="lblId"><%= row.ID %></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="fs20">Username</label>
+                    </td>
+                    <td>
+                        <input id="txtUsr" class="mt10 w230 h30 bt bn on fs25 ml20" type="text"
+                            value="<%= row.username %>" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="mt10 fs20">Password</label>
+                    </td>
+                    <td>
+                        <input id="txtPwd" class="mt10 w230 h30 bt bn on fs25 ml20" type="text"
+                            value="<%= row.password %>" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="pt20 tac">
+        <input id="btnSave"   type="button" class="btnSave w200 bsstd" value="Save"   onclick="validate();" />
+        <input id="btnCancel" type="button" class="btnSave w200 bsstd" value="Cancel" onclick="showMsg('Cancel?');" />
+    </div>
+    <div id="divMsg" class="divMessage bcw bsstd">
+        <table class="ma pb20">
+            <tr class="tac">
+                <td colspan="2" class="tac pt20 pb20">
+                    <label id="lblMessage" class="fs30">Blah Blah</label>
+                </td>
+            </tr>
+            <tr class="tac">
+                <td class="pl10 pr10">
+                    <input id="btnYes" type="button" class="w100 h50 fs30" value="Yes" onclick="confirmed('yes');" />
+                </td>
+                <td class="pl10 pr10">
+                    <input id="btnNo"  type="button" class="w100 h50 fs30" value="No"  onclick="confirmed('no');" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="divErr" class="divMessage bcw bsstd">
+        <table class="ma pb20">
+            <tr class="tac">
+                <td colspan="2" class="tac pt20 pb20">
+                    <label id="lblMessage" class="fs30">Can't save, you forgot something.</label>
+                </td>
+            </tr>
+            <tr class="tac">
+                <td class="pl10 pr10">
+                    <input id="btnOk" type="button" class="w100 h50 fs30" value="OK" onclick="hideErr();" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>
