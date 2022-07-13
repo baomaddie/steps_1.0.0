@@ -186,8 +186,8 @@ var updateClient = (req) => {
                 s = s + key + '="' + item + '"';
               } else {
                 switch (key) {
-                  case key.match(/^t/)?.input:
-                  case key.match(/^d/)?.input:
+                  case key.match("t"):
+                  case key.match("d"):
                   case "p1":
                   case "s1":
                     s = s + key + '="' + encrypt(item) + '", ';
@@ -623,8 +623,8 @@ var readClient = (ID) => {
           } else {
             for (var key in row) {
               switch (key) {
-                case key.match(/^t/)?.input: //starts with a 't'
-                case key.match(/^d/)?.input: //starts with a 'd'
+                case key.match("t"): //starts with a 't'
+                case key.match("d"): //starts with a 'd'
                 case "p1": //phone
                 case "s1": //state
                   row[key] = decrypt(row[key]);
